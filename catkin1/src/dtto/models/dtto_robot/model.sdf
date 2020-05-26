@@ -1,0 +1,133 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="dtto">
+    <static>true</static>
+    <link name="male_link">
+      <pose>0 0.01 0 0 -1.5707 0</pose>
+
+      <collision name="collision">
+        <geometry>
+          <mesh>
+		<uri>model://dtto/meshes/male.dae</uri>
+	</mesh>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+        	<mesh>
+			<!--<scale>0.065 0.064 0.064</scale>-->
+			<uri>model://dtto/meshes/male.dae</uri>
+		 </mesh>
+        </geometry>
+       <material>
+         <ambient>1 0 0 1</ambient>
+         <diffuse>1 0 0 1</diffuse>
+         <specular>0.1 0.1 0.1 1</specular>
+         <emissive>0 0 0 0</emissive>
+      </material>
+      </visual>
+</link>
+      
+<link name="joint_link">
+	
+      <pose>-0.12 0.09 0 4.7121 -3.1414 3.1414</pose>
+
+      <!--<collision name="collision">
+        <geometry>
+          <mesh>
+		<scale>0.01 0.096 0.03</scale>
+		<uri>model://dtto/meshes/cube.dae</uri>
+	</mesh>
+        </geometry>
+      </collision>-->
+
+      <visual name="visual">
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+        	<mesh>
+			<scale>0.2 0.096 0.12</scale>
+			<uri>model://dtto/meshes/cube.dae</uri>
+		 </mesh>
+        </geometry>
+
+      </visual>
+</link>
+
+<!--<transmission name="trans_male">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="male_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_male">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>-->
+
+<joint name="male_joint" type="revolute">
+      <parent>joint_link</parent>
+      <child>male_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <use_parent_model_frame>true</use_parent_model_frame>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0.000000</cfm>
+            <erp>0.900000</erp>
+          </limit>
+        </ode>
+      </physics>
+    </joint>
+
+<joint name="female_joint" type="revolute">
+      <parent>joint_link</parent>
+      <child>female_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <use_parent_model_frame>true</use_parent_model_frame>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0.000000</cfm>
+            <erp>0.900000</erp>
+          </limit>
+        </ode>
+      </physics>
+    </joint>
+
+<link name="female_link">
+      <pose>-0.064 0 0 0 -1.5707 3.1414</pose>
+
+<collision name="collision">
+        <geometry>
+          <mesh>
+		<uri>model://dtto/meshes/female.dae</uri>
+	</mesh>
+        </geometry>
+      </collision>
+
+<visual name="visual">
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+        	<mesh>
+			<!--<scale>0.065 0.064 0.064</scale>-->
+			<uri>model://dtto/meshes/female.dae</uri>
+		 </mesh>
+        </geometry>
+        <material>
+           <ambient>1 0 0 1</ambient>
+           <diffuse>1 0 0 1</diffuse>
+           <specular>0.1 0.1 0.1 1</specular>
+           <emissive>0 0 0 0</emissive>
+       </material>
+      </visual>
+   
+     
+    </link>
+  </model>
+</sdf>

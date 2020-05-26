@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <!--<arg name="world_name" default="/usr/share/gazebo-7/worlds/robocup14_spl_field.world"/>-->
+<!--<arg name="world_name" value="$(find dtto)/world/dtto_world.world"/>-->
+	
+    </include>
+ 	<param name="robot_description" textfile="$(find dtto)/urdf/model.urdf" />
+<node name="spawn_dtto" pkg="gazebo_ros" type="spawn_model"
+   args="-param robot_description
+         -urdf
+         -x 0.0
+         -y 0.0
+         -z 0.0
+         -model dtto_robot2"
+   respawn="false" output="screen">
+  </node>
+
+
+
+	<!-- create RViz node -->
+	<node name="rviz" pkg="rviz" type="rviz" output = "screen" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+
+    
+</launch>
